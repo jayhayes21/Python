@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from csv import writer
 import time
+from elliptical_miles_functions import get_elliptical_miles, clear_file_contents
 
 def get_runners_mileage(url):
     driver.get(url)
@@ -24,12 +25,15 @@ username = 'username'
 password = 'passsword'
 #Username and Password information for Strava
 
+elliptical_tracker_file = 'elliptical_miles.txt'
+
 Harris_Strava_url = 'https://www.strava.com/athletes/15522985?oq=ha'
 Cooper_Strava_url = 'https://www.strava.com/athletes/15955087?oq=coop'
 Brain_Wang_url = 'https://www.strava.com/athletes/27576319?oq=bri'
 
-ellptical_time = float(input('Enter the minutes that you were on the ellptical here: '))
+ellptical_time = get_elliptical_miles(elliptical_tracker_file)
 elliptical_mileage = round(((ellptical_time * 60) / (510)), 2)
+clear_file_contents(elliptical_tracker_file)
 #Calculating elliptical mileage assuming a pace of 8:30 per mile
 
 path_to_log = r'path to posts.csv'
